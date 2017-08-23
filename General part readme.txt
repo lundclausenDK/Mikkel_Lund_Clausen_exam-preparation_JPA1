@@ -12,6 +12,14 @@ Hereafter listed my perseption of the subject.
 Pros:
 - Less coding
 - Less repetitions
-- No stupid stringify of objects to put in db, and stringifying when retreiving from db before returning the newly populated object with data (object -> strings -> db) and (object <- strings <- db)
+- Easy to manage large portion of data mappings
+- No stupid stringifying of objects to put in db, and stringifying when retreiving from db before returning the newly populated object with data (object -> strings/int -> db) and (object <- strings/int <- db)
 
 Cons:
+- Every table needs to be an object
+- No control exactly what happenes under the hood
+- Dependency on external frameworks, Maven, Eclipse etc
+
+The strategy behind JPA for handling ORM and classes/innotations is to keep the Object Oriented programming in primary focus. You only work with objects and the ORM framework does the SQL, Mapping, Stringifying for you. This demands a good understanding of the annotations for the chosen framework in hand. 
+
+The fundamental differences between plain JDBC versus JPA is that you dont need a mapper class/methods with statements, resultsets etc for each object that needs data-storing in the database.
