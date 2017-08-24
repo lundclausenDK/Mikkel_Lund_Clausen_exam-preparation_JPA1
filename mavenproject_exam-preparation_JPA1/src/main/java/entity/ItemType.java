@@ -1,3 +1,4 @@
+
 package entity;
 
 import java.io.Serializable;
@@ -5,18 +6,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+
 
 @Entity
-@NamedQuery(name = "findCostumerByEmail", query ="SELECT c FROM Customer c WHERE c.email = :email")
-public class Customer implements Serializable {
+public class ItemType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
-    private String email;
+    private String description;
+    private double price;
 
     public int getId() {
         return id;
@@ -36,10 +37,10 @@ public class Customer implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Customer)) {
+        if (!(object instanceof ItemType)) {
             return false;
         }
-        Customer other = (Customer) object;
+        ItemType other = (ItemType) object;
         if (this.id != other.id) {
             return false;
         }
@@ -48,7 +49,7 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Customer[ id=" + id + " ]";
+        return "entity.ItemType[ id=" + id + " ]";
     }
 
     public String getName() {
@@ -59,12 +60,20 @@ public class Customer implements Serializable {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getDescription() {
+        return description;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
     
     

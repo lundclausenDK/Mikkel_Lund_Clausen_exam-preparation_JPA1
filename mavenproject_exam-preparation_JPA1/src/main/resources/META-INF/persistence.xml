@@ -3,6 +3,7 @@
   <persistence-unit name="jpaPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>entity.Customer</class>
+    <class>entity.ItemType</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://165.227.151.92:3306/MikeJPA1?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="mikkel"/>

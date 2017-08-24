@@ -1,19 +1,21 @@
 package facade;
 
 import entity.Customer;
+import entity.ItemType;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 
 public class Facade {
+    
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpaPU");
+    private EntityManager em = emf.createEntityManager();
+    
     
     public void createCustomer(String name, String email) {
         
         Customer c = new Customer();
-        
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpaPU");
-        EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
         
@@ -22,23 +24,39 @@ public class Facade {
         
         em.persist(c);
         em.getTransaction().commit();
-        em.close();
+        //em.close();
         
     }
     
-    public Object findCustomerByEmail(String email) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpaPU");
-        EntityManager em = emf.createEntityManager();
+    public void createItemType(String name, String Description, double price) {
+        
+        ItemType it = new ItemType();
         
         em.getTransaction().begin();
         
-        Query q = em.createQuery("SELECT NAME FROM CUSTOMER WHERE EMAIL = '" + email + "'");
+        it.setName(name);
+        it.setDescription(Description);
+        it.setPrice(price);
         
-        Object result = q.getSingleResult();
+        em.persist(it);
+        em.getTransaction().commit();
+        //em.close();
         
+    }
+    
+    public List<Customer> findCustomerByEmail(String email) {
+        
+        em.getTransaction().begin();
+        
+        List<Customer> results = em.createNamedQuery("findCostumerByEmail").setParameter("email", email).getResultList();
+                
+        //em.close();
+        
+        return results;
+    }
+    
+    public void close() {
         em.close();
-        
-        return result;
     }
     
     
